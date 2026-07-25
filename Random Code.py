@@ -1,5 +1,12 @@
 import cv2
 
+if __name__ == '__main__':
+    rclpy.init()
+    node = rclpy.create_node('color_detect_node')
+    node.create_subscription(Image, '/depth_cam/rgb/image_raw', image_callback, 1)
+    threading.Thread(target=main, daemon=True).start()
+    rclpy.spin(node)
+
 def main():
     running = True
     while running:
